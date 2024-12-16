@@ -1,5 +1,6 @@
 package personnel;
 
+import java.time.LocalDate;	
 import java.io.Serializable;
 
 /**
@@ -16,8 +17,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
+    private LocalDate dateDepart;
+	private LocalDate dateArrive;
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrive, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -25,6 +28,8 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
+        this.dateArrive = dateArrive;
+        this.dateDepart = dateDepart;       
 	}
 	
 	/**
@@ -116,7 +121,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * de l'employé.
 	 * @return vrai ssi le password passé en paramètre est bien celui
 	 * de l'employé.
-	 * @param password le password auquel comparer celui de l'employé.
+	 * @param password le pas	sword auquel comparer celui de l'employé.
 	 */
 	
 	public boolean checkPassword(String password)
@@ -141,8 +146,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	public Ligue getLigue()
 	{
-		return ligue;
+		return this.ligue;
 	}
+
+
+
 
 	/**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
@@ -174,7 +182,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	@Override
 	public String toString()
 	{
-		String res = nom + " " + prenom + " " + mail + " (";
+		String res = nom + " " + prenom + " " + mail + " " + dateArrive + " " + dateDepart + " " + " (";
 		if (estRoot())
 			res += "super-utilisateur";
 		else
